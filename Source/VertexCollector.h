@@ -23,6 +23,7 @@
 #include <optional>
 #include <span>
 #include <vector>
+#include <fmt/core.h>
 
 #include "Buffer.h"
 #include "Common.h"
@@ -147,7 +148,7 @@ private:
     private:
         static auto MakeName( std::string_view basename, bool isStaging )
         {
-            return std::format( "{}{}", basename, isStaging ? " (staging)" : "" );
+            return fmt::format( "{}{}", basename, isStaging ? " (staging)" : "" );
         }
 
         void Init( std::shared_ptr< Buffer > otherDeviceLocal,

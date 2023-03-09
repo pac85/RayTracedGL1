@@ -22,6 +22,7 @@
 
 #include <array>
 #include <optional>
+#include <limits>
 
 #include "Common.h"
 #include "RTGL1/RTGL1.h"
@@ -196,7 +197,7 @@ namespace Utils
     RgTransform MakeTransform( const RgFloat3D& up, const RgFloat3D& forward, float scale );
     RgTransform MakeTransform( const RgFloat3D& position, const RgFloat3D& forward );
 
-    constexpr double M_PI = 3.1415926535897932384626433;
+    //const double M_PI = 3.1415926535897932384626433;
 
     constexpr float DegToRad( float degrees )
     {

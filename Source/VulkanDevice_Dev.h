@@ -37,7 +37,7 @@ struct Devmode
 
     enum class DebugPrimMode : int
     {
-        None,
+        ANone,
         RayTraced,
         Rasterized,
         NonWorld,
@@ -84,7 +84,7 @@ struct Devmode
 
     bool materialsTableEnable{ false };
 
-    DebugPrimMode            primitivesTableMode{ DebugPrimMode::None };
+    DebugPrimMode            primitivesTableMode{ DebugPrimMode::ANone };
     std::vector< DebugPrim > primitivesTable{};
 
     bool breakOnTexturePrimitive{ false };

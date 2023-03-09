@@ -25,6 +25,9 @@
 #include <functional>
 #include <memory>
 #include <variant>
+#include <cfloat>
+#include <optional>
+#include <iterator>
 
 #include <vulkan/vulkan.h>
 

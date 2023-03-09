@@ -20,8 +20,8 @@
 
 #pragma once
 
-#include <format>
 #include <string_view>
+#include <fmt/core.h>
 
 // TODO: fmt instead of std::format? for compile-time checks
 
@@ -63,7 +63,7 @@ namespace debug
             }
 
             auto str =
-                std::vformat( msg, std::make_format_args( std::forward< Args >( args )... ) );
+                fmt::vformat( msg, fmt::make_format_args( std::forward< Args >( args )... ) );
 
             Print( severity, std::string_view( str ) );
         }

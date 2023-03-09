@@ -34,7 +34,7 @@ enum class PrepareResult
 {
     Fail,
     AlreadyExists,
-    Success
+    ASuccess
 };
 
 PrepareResult PrepareTargetFile( const std::filesystem::path& filepath, bool overwriteFiles )
@@ -68,7 +68,7 @@ PrepareResult PrepareTargetFile( const std::filesystem::path& filepath, bool ove
         }
     }
 
-    return PrepareResult::Success;
+    return PrepareResult::ASuccess;
 }
 
 }
@@ -109,7 +109,7 @@ bool RTGL1::TextureExporter::ExportAsTGA( MemoryAllocator&             allocator
     switch( PrepareTargetFile( filepath, overwriteFiles ) )
     {
         case PrepareResult::AlreadyExists: return true;
-        case PrepareResult::Success: break;
+        case PrepareResult::ASuccess: break;
         case PrepareResult::Fail:
         default: return false;
     }

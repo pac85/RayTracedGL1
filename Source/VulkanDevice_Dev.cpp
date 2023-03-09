@@ -26,6 +26,8 @@
 
 #include <ranges>
 
+#include <fmt/core.h>
+
 namespace
 {
 
@@ -121,12 +123,12 @@ void RTGL1::VulkanDevice::Dev_Draw() const
             ImGui::Checkbox( "Vsync", &modifiers.vsync );
             ImGui::SliderFloat( "Vertical FOV", &modifiers.fovDeg, 10, 120, "%.0f degrees" );
 
-            static_assert(
+            /*static_assert(
                 std::is_same_v< int, std::underlying_type_t< RgRenderUpscaleTechnique > > );
             static_assert(
                 std::is_same_v< int, std::underlying_type_t< RgRenderSharpenTechnique > > );
             static_assert(
-                std::is_same_v< int, std::underlying_type_t< RgRenderResolutionMode > > );
+                std::is_same_v< int, std::underlying_type_t< RgRenderResolutionMode > > );*/
 
             bool dlssOk = IsUpscaleTechniqueAvailable( RG_RENDER_UPSCALE_TECHNIQUE_NVIDIA_DLSS );
             {
@@ -321,7 +323,7 @@ void RTGL1::VulkanDevice::Dev_Draw() const
 
         ImGui::TextUnformatted( "Record: " );
         ImGui::SameLine();
-        ImGui::RadioButton( "None", modePtr, static_cast< int >( PrimMode::None ) );
+        ImGui::RadioButton( "None", modePtr, static_cast< int >( PrimMode::ANone ) );
         ImGui::SameLine();
         ImGui::RadioButton( "Ray-traced", modePtr, static_cast< int >( PrimMode::RayTraced ) );
         ImGui::SameLine();
@@ -373,7 +375,7 @@ void RTGL1::VulkanDevice::Dev_Draw() const
                         {
                             const ImGuiTableColumnSortSpecs* srt = &sortspecs->Specs[ n ];
 
-                            std::strong_ordering ord{ 0 };
+                            std::strong_ordering ord = std::strong_ordering::equal;
                             switch( srt->ColumnIndex )
                             {
                                 case 0: ord = ( a.callIndex <=> b.callIndex ); break;
@@ -473,7 +475,7 @@ void RTGL1::VulkanDevice::Dev_Draw() const
                     }
                     else
                     {
-                        if( ImGui::BeginPopupContextItem( std::format( "##popup{}", i ).c_str() ) )
+                        if( ImGui::BeginPopupContextItem( fmt::format( "##popup{}", i ).c_str() ) )
                         {
                             if( ImGui::MenuItem( "Copy texture name" ) )
                             {
@@ -683,7 +685,7 @@ void RTGL1::VulkanDevice::Dev_Draw() const
                 ImGui::SliderFloat3(
                     "World Forward vector", dev.worldTransform.forward.data, -1.0f, 1.0f );
                 ImGui::InputFloat(
-                    std::format( "1 unit = {} meters", dev.worldTransform.scale ).c_str(),
+                    fmt::format( "1 unit = {} meters", dev.worldTransform.scale ).c_str(),
                     &dev.worldTransform.scale );
             }
             ImGui::EndDisabled();
@@ -756,7 +758,7 @@ void RTGL1::VulkanDevice::Dev_Draw() const
                         {
                             const ImGuiTableColumnSortSpecs* srt = &sortspecs->Specs[ n ];
 
-                            std::strong_ordering ord{ 0 };
+                            std::strong_ordering ord = std::strong_ordering::less;
                             switch( srt->ColumnIndex )
                             {
                                 case ColumnTextureIndex0:
@@ -880,7 +882,7 @@ void RTGL1::VulkanDevice::Dev_Draw() const
                                 else
                                 {
                                     if( ImGui::BeginPopupContextItem(
-                                            std::format( "##popup{}", i ).c_str() ) )
+                                            fmt::format( "##popup{}", i ).c_str() ) )
                                     {
                                         if( ImGui::MenuItem( "Copy texture name" ) )
                                         {

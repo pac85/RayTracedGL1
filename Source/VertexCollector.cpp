@@ -34,7 +34,7 @@ namespace
 
 auto MakeName( std::string_view basename, RTGL1::VertexCollectorFilterTypeFlags filter )
 {
-    return std::format( "VC: {}-{}",
+    return fmt::format( "VC: {}-{}",
                         basename,
                         filter & RTGL1::VertexCollectorFilterTypeFlagBits::CF_DYNAMIC ? "Dynamic"
                                                                                       : "Static" );

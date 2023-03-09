@@ -23,6 +23,7 @@
 #include <fstream>
 #include <vector>
 #include <cstring>
+#include <fmt/core.h>
 #include "RgException.h"
 
 using namespace RTGL1;
@@ -174,7 +175,7 @@ VkPipelineShaderStageCreateInfo ShaderManager::GetStageInfo( std::string_view na
         using namespace std::string_literals;
 
         throw RgException( RG_RESULT_ERROR_CANT_FIND_HARDCODED_RESOURCES,
-                           std::format( "Can't find loaded shader with name \"{}\"", name ) );
+                           fmt::format( "Can't find loaded shader with name \"{}\"", name ) );
     }
 
     return VkPipelineShaderStageCreateInfo{
@@ -188,7 +189,9 @@ VkPipelineShaderStageCreateInfo ShaderManager::GetStageInfo( std::string_view na
 VkShaderModule ShaderManager::LoadModuleFromFile( const std::filesystem::path& path )
 {
     std::ifstream          shaderFile( path, std::ios::binary );
-    std::vector< uint8_t > shaderSource( std::istreambuf_iterator( shaderFile ), {} );
+    std::vector< uint8_t > shaderSource;
+    std::copy(std::istream_iterator<uint8_t>(shaderFile), std::istream_iterator<uint8_t>(),
+              std::back_inserter(shaderSource));
 
     if( shaderSource.empty() )
     {

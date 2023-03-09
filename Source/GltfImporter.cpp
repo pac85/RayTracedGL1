@@ -29,7 +29,7 @@
 
 #include "cgltf/cgltf.h"
 
-#include <format>
+#include <fmt/core.h>
 
 namespace RTGL1
 {
@@ -248,7 +248,7 @@ namespace
                         {
                             debugprintAttr(
                                 attr,
-                                std::format(
+                                fmt::format(
                                     "Mismatch on attributes count (expected {}, but got {})",
                                     *vertexCount,
                                     attr.data->count ) );
@@ -909,7 +909,7 @@ void RTGL1::GltfImporter::UploadToScene( VkCommandBuffer           cmd,
 
         constexpr auto candelaToLuminousFlux = []( float lumensPerSteradian ) {
             // to lumens
-            return lumensPerSteradian * ( 4 * float( Utils::M_PI ) );
+            return lumensPerSteradian * ( 4 * float( M_PI ) );
         };
 
         auto makeExtras = []( const char* extradata ) {
