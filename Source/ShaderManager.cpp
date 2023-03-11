@@ -190,8 +190,14 @@ VkShaderModule ShaderManager::LoadModuleFromFile( const std::filesystem::path& p
 {
     std::ifstream          shaderFile( path, std::ios::binary );
     std::vector< uint8_t > shaderSource;
-    std::copy(std::istream_iterator<uint8_t>(shaderFile), std::istream_iterator<uint8_t>(),
-              std::back_inserter(shaderSource));
+    /*std::copy(std::istream_iterator<uint8_t>(shaderFile), std::istream_iterator<uint8_t>(),
+              std::back_inserter(shaderSource));*/
+    assert(shaderFile.is_open());
+    while (!(shaderFile.eof() || shaderFile.fail())) {
+        char buffer[100];
+        shaderFile.read(buffer, 100);
+        shaderSource.insert(shaderSource.end(), buffer, buffer + shaderFile.gcount());
+    }
 
     if( shaderSource.empty() )
     {

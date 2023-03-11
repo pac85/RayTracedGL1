@@ -808,7 +808,7 @@ void RTGL1::VulkanDevice::CreateDevice()
         .pNext                    = &robustness,
         .samplerMirrorClampToEdge = 1,
         .drawIndirectCount        = 1,
-        .shaderFloat16            = 1,
+        //.shaderFloat16            = 1,
         .shaderSampledImageArrayNonUniformIndexing  = 1,
         .shaderStorageBufferArrayNonUniformIndexing = 1,
         .runtimeDescriptorArray                     = 1,
